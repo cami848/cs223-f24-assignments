@@ -98,5 +98,6 @@ int main() {
   struct song *songList = readSongs(&size);
   printSongs(songList, size);
   free(songList);
+  songList = NULL;
   return 0;
 }

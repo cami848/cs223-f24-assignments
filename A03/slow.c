@@ -30,10 +30,14 @@ int main() {
       printf(".");
     }
   }
-  printf("\n");
 
+  printf("\n");
+  // Free heap space
   free(length);
+  length = NULL;
   free(buff);
+  buff = NULL;
   free(letter);
+  letter = NULL;
   return 0;
 }
