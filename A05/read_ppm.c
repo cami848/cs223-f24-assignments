@@ -39,7 +39,7 @@ struct ppm_pixel *read_ppm(const char *filename, int *w, int *h) {
 
   struct ppm_pixel *pixel = malloc((*w * *h) * sizeof(struct ppm_pixel));
 
-  // reads pixel data from filr into *pixel
+  // reads pixel data from file into *pixel
   fgets((char *)pixel, (*w * *h) * sizeof(struct ppm_pixel), infile);
 
   fclose(infile);
