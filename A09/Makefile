@@ -1,5 +1,5 @@
 CC=gcc
-SOURCES=single_mandelbrot multi_mandelbrot
+SOURCES=single_mandelbrot thread_mandelbrot
 FILES := $(subst .c,,$(SOURCES))
 FLAGS=-g -Wall -Wvla -Werror -Wno-unused-variable -Wno-unused-but-set-variable
 
