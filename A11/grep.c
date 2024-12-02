@@ -1,6 +1,6 @@
 /*----------------------------------------------
  * Author: Camille Lopez
- * Date:11/15/2024
+ * Date:12/1/2024
  * Description: This program implements a
  * simplified version of the bash command grep
  * that uses N threads to search for a keyword
@@ -33,7 +33,7 @@ pthread_barrier_t mybarrier;
 
 /**
  * Function that searchs for a keyword in a set of files
- * @param user_data  Pointer to thread_data 
+ * @param user_data  Pointer to thread_data
  * @return void
  */
 void *grep(void *user_data) {
@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
     }
     pclose(fp);
 
-    int line_count[N];
+    int *line_count = malloc(N * sizeof(int));
     char *keyword = argv[2];
     int extra_files = totalFiles % N;
     int numFiles = totalFiles / N;
@@ -118,8 +118,8 @@ int main(int argc, char *argv[]) {
     pthread_mutex_init(&mutex, NULL);
     pthread_barrier_init(&mybarrier, NULL, N);
     printf("Searching %d files for keyword: %s\n", totalFiles, keyword);
-    pthread_t threads[N];
-    struct thread_data data[N];
+    pthread_t *threads = malloc(N * sizeof(pthread_t));
+    struct thread_data *data = malloc(N * sizeof(struct thread_data));
     // Start thread creation
     for (int i = 0; i < N; i++) {
       data[i].start_index = i * numFiles + (i < extra_files ? i : extra_files);
@@ -154,6 +154,9 @@ int main(int argc, char *argv[]) {
       free(files[i]);
     }
     free(files);
+    free(threads);
+    free(data);
+    free(line_count);
   }
   return 0;
 }

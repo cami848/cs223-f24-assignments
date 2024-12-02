@@ -4,7 +4,7 @@
  * Description: This program implements a
  *  implement a program that uses N threads to
  *  build a binary search tree of a given set
- * of files
+ * of files.
  ---------------------------------------------*/
 #include "tree.h"
 #include <pthread.h>
@@ -85,7 +85,8 @@ int main(int argc, char *argv[]) {
     }
     pclose(fp);
 
-    int line_count[N];
+    int *line_count = malloc(N * sizeof(int));
+    ;
     char *keyword = "#include";
     int extra_files = totalFiles % N;
     int numFiles = totalFiles / N;
@@ -140,6 +141,7 @@ int main(int argc, char *argv[]) {
         free(threads);
         free(data);
         clear(root);
+        free(line_count);
         pthread_mutex_destroy(&mutex);
         pthread_barrier_destroy(&mybarrier);
         exit(0);
@@ -203,7 +205,8 @@ int main(int argc, char *argv[]) {
     }
     free(files);
     free(threads);
-    exit(0);
+    free(line_count);
+    free(data);
     return 0;
   }
 }
