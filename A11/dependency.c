@@ -9,8 +9,6 @@
 #include "tree.h"
 #include <pthread.h>
 #include <pwd.h>
-#include <readline/history.h>
-#include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -164,7 +162,7 @@ int main(int argc, char *argv[]) {
             // Check if the line contains the keyword "#include"
             char *line = strstr(buffer, keyword);
             if (line != NULL) {
-              char dependency[150];
+              char dependency[100];
               // Extract the dependency between quotes or angle brackets
               char *start = strchr(buffer, '"');
               if (start) {
